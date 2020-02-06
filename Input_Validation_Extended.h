@@ -11,6 +11,18 @@ double validateDouble(double &); //use the validation method to vaildate and ret
 char validateChar(char &); //use the validation method to vaildate and return a data type char pass by reference &
 string validateString(string &); //use the validation method to vaildate and return a data type string pass by reference &
 
+//color code global variables and clear
+   string cRed = "\x1b[1;91m";
+   string cGreen = "\x1b[1;32m";
+   string cYellow = "\x1b[1;93m";
+   string cBlue = "\x1b[1;34m";
+   string cOrange = "\x1b[1;33m";
+   string cCyan = "\x1b[1;36m";
+   string cPurple = "\x1b[1;35m";
+   string cItalic = "\x1b[3m";
+   string cUnderL = "\x1b[4m";
+   string cReset = "\x1b[0m";
+
 template <typename T>
 T getValidatedInput()
 {
@@ -34,7 +46,7 @@ T getValidatedInput()
 
         // Throw an exception. Allows the caller to handle it any way you see fit
         // (exit, ask for input again, etc.)
-        throw ios_base::failure("Invalid input.");
+        throw ios_base::failure("\x1b[1;91m Invalid input. \x1b[0m");
     }
 
     return result;
@@ -45,15 +57,14 @@ int validateInt(int &intInput)
 {
 	while (true)
     {
-        cout << "Enter an integer: ";
-
+        
         try
         {
             intInput = getValidatedInput<int>();
         }
         catch (exception e)
         {
-            cerr << e.what() << endl;
+            cerr << e.what() << cRed << " -INVALID INPUT-"<< cReset << endl;
             continue;
         }
 
@@ -67,15 +78,14 @@ double validateDouble(double &doubleInput)
 {
 	while (true)
     {
-        cout << "Enter a number with or without decimals (double): ";
-
+        
         try
         {
             doubleInput = getValidatedInput<double>();
         }
         catch (exception e)
         {
-            cerr << e.what() << ": Invalid input."<< endl;
+            cerr << e.what() << cRed << " -INVALID INPUT-"<< cReset << endl;
             continue;
         }
 
@@ -89,15 +99,14 @@ char validateChar(char &charInput)
 { 
     while (true)
     {
-        cout << "Enter a single letter or number (1 digit): ";
-
+    
         try
         {
             charInput = getValidatedInput<char>();
         }
         catch (exception e)
         {
-            cerr << e.what() << ": Invalid input."<< endl;
+            cerr << e.what() << cRed << " -INVALID INPUT-"<< cReset << endl;
             continue;
         }
 
@@ -111,15 +120,14 @@ string validateString(string &stringInput)
 {
     while (true) //use cin, getline() for this 
     {
-        cout << "Enter a word (no spaces): ";
-
+       
         try
         {
             stringInput  = getValidatedInput<string>();
         }
         catch (exception e)
         {
-            cerr << e.what() << ": Invalid input."<< endl;
+            cerr << e.what() << cRed << " -INVALID INPUT-"<< cReset << endl;
             continue;
         }
 
